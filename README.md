@@ -1,4 +1,4 @@
-# wdde480
+# wdde480-advJS
 Advanced JavaScript @ UMGC
 
 This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now it contains Project 1, a small Node.js web server in the `project1` folder. What follows is a step-by-step guide so another developer can build the same thing from the starter files and get it onto GitHub and their own computer, and I kept the steps in the order I actually did them, so if you follow them top to bottom you should end up exactly where I did.
@@ -78,7 +78,7 @@ This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now 
 
 ## Part 4: Put it on your own GitHub
 
-1. Create a new public repo on GitHub (I named mine `wdde480`). If you tick the boxes for a LICENSE and README, that is fine, and I kept both instead of overwriting them.
+1. Create a new public repo on GitHub (I named mine `wdde480-advJS`). If you tick the boxes for a LICENSE and README, that is fine, and I kept both instead of overwriting them.
 2. Clone your new repo and copy the finished project into a `project1` folder inside it, leaving out `node_modules` and the starter's `.git` folder, since the first can be rebuilt with `npm install` and the second would tangle the two repos together.
 3. Commit and push to `main`, and if the push is rejected, run `git pull` first and then push again.
    ```
@@ -95,9 +95,9 @@ This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now 
    ```
 2. Print the public key (`cat ~/.ssh/id_ed25519.pub`, or `type $env:USERPROFILE\.ssh\id_ed25519.pub` in PowerShell) and add it on GitHub under Settings, then SSH and GPG keys, then New SSH key. Only ever share the `.pub` file, because the other one is your private key.
 3. Test the connection with `ssh -T git@github.com`, and you should see a greeting with your username if everything is set up correctly.
-4. Clone into your dev folder, and if you get a permission error, your key is probably not registered with GitHub yet, so the HTTPS address (`https://github.com/gilbertanderson/wdde480.git`) works in the meantime.
+4. Clone into your dev folder, and if you get a permission error, your key is probably not registered with GitHub yet, so the HTTPS address (`https://github.com/gilbertanderson/wdde480-advJS.git`) works in the meantime.
    ```
-   git clone git@github.com:gilbertanderson/wdde480.git
+   git clone git@github.com:gilbertanderson/wdde480-advJS.git
    ```
 5. Confirm the clone has the latest commit and the `project1` files, then run `cd project1`, `npm install`, and `npm run dev` to make sure everything works on your machine too.
 
