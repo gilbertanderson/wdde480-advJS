@@ -34,11 +34,11 @@ This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now 
      res.end("<h1>Resource not found</h1>");
    };
    ```
-3. Add the `/healthcheck` route, which sends a 200 with a short HTML body. I could not see the assignment's figure for this page, so I used `<h1>OK</h1>` as my best guess, and in my view you should match whatever your own figure shows if it says something different.
+3. Add the `/healthcheck` route, which sends a 200 with a short HTML body. The assignment's figure for this page shows a bold heading that reads "Server is running", so that is the text to send, and I believe matching it exactly matters since the rubric scores the health check response and message.
    ```js
    if (req.url === "/healthcheck") {
      res.writeHead(httpStatus.StatusCodes.OK, { "Content-Type": "text/html" });
-     res.end("<h1>OK</h1>");
+     res.end("<h1>Server is running</h1>");
    }
    ```
 4. Add the static route that serves `/views/index.html` with `fs.readFile` and `path.join`, and put a `return` right after the error response, because without it the server can try to answer the same request twice when a file read fails.
@@ -69,7 +69,7 @@ This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now 
 
 1. Start the server with `npm run dev`, which runs nodemon. If you run it before finishing Part 2 you will see `ReferenceError: http is not defined`, and that is expected, since the server code does not exist yet; press Control + C whenever you want to stop nodemon.
 2. Open each of these URLs and confirm the result, and to be fair the 404 one is easy to skip, but it is the quickest way to prove the error handler works.
-   - `http://localhost:8000/healthcheck` shows the OK page with a 200.
+   - `http://localhost:8000/healthcheck` shows the "Server is running" heading with a 200.
    - `http://localhost:8000/views/index.html` shows the static page with a 200.
    - `http://localhost:8000/api/resources` shows the JSON list of five resources with a 200.
    - `http://localhost:8000/nope` shows the "Resource not found" page with a 404.

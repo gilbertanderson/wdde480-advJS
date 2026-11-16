@@ -23,7 +23,7 @@ const server = http.createServer(function (req, res) {
     res.writeHead(httpStatus.StatusCodes.OK, {
       "Content-Type": "text/html",
     });
-    res.end("<h1>OK</h1>");
+    res.end("<h1>Server is running</h1>");
   }
 
   // Implement static file system and serve /views/index.html
