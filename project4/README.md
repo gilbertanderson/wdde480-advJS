@@ -9,7 +9,7 @@ The starter from `icarnaghan/cmst488-project4` already had the routes and the da
 1. `models/Resource.js` defines `name`, `provider` and `url` as required, unique strings, each with its own validation message, which matches the shape of the resources from Projects 1 through 3.
 2. `controllers/ResourceController.js` implements `getResources`, `getSingleResource`, `createResource`, `updateResource` and `deleteResource`. Each one returns a 200 with `success: true` and the data, or a 400 with `success: false` and the error message, and update uses `new: true` and `runValidators: true` so an edit cannot sneak past the model's rules.
 
-I also made a few changes beyond the TODOs, since I believe they save trouble later. Unknown ids return a 404 instead of an empty 200, the server listens on `process.env.PORT || 8000` so Azure can assign the port, a `web.config` tells IIS on Azure to start `index.js`, and the controller `require` lines now match the file names' capitalization, because the starter's lowercase paths work on Windows and Mac but crash on Linux.
+I also made a few changes beyond the TODOs, since I believe they save trouble later. Unknown ids return a 404 instead of an empty 200, the server listens on `process.env.PORT || 8000` so Azure can assign the port, `web.config` and `iisnode.yml` handle running on Azure (more on that below), and the controller `require` lines now match the file names' capitalization, because the starter's lowercase paths work on Windows and Mac but crash on Linux.
 
 ## Running it
 
@@ -30,3 +30,9 @@ All requests use `http://localhost:8000/api/resources` as the base, and POST and
 | DELETE | `/api/resources/<id>` | 200 with `data: {}` |
 
 The handout also shows the single-record path as `/api/resource/<id>`, which is missing the "s". To be fair, the error cases are worth a quick try too, since posting a duplicate name or leaving out a field should come back as a 400 with the validation message.
+
+## Deploying to Azure
+
+The UMGC lab's App Service runs Windows with iisnode, and since my lab account has no access to the Azure portal I couldn't set any app settings, so the deployment has to carry everything it needs. That is why the folder has two Azure-only files. `web.config` sends every request to `index.js`, hides `node_modules` and `config` so `config.env` can never be downloaded, and passes the app's own error responses through, while `iisnode.yml` points iisnode at the Node 20 that is already installed on the server, because without `WEBSITE_NODE_DEFAULT_VERSION` it couldn't find `node.exe` at all.
+
+To deploy, I run `npm ci --omit=dev`, then zip `index.js`, `package.json`, `package-lock.json`, `web.config`, `iisnode.yml`, `config` (including my local `config.env`), `controllers`, `models`, `views` and `node_modules` with the files at the top level of the zip. The zip goes up through Kudu's Zip Push Deploy page or its `/api/zipdeploy` endpoint, using the publish profile login from the lab page. Atlas also has to allow the App Service's outbound IP, or `0.0.0.0/0`, under Network Access, and in my case the rule took a few minutes past "Active" before the live `/api/resources` started returning data.

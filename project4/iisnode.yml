@@ -1,0 +1,11 @@
+# iisnode settings for the UMGC lab's Azure App Service (Windows).
+# The lab gives no portal access, so WEBSITE_NODE_DEFAULT_VERSION can't be set,
+# and without it iisnode can't find node.exe (HRESULT 0x2). This points it at
+# the Node 20 that the App Service image already has installed.
+nodeProcessCommandLine: "%ProgramFiles(x86)%\nodejs\20.20.2\node.exe"
+
+# Writes node's stdout/stderr to LogFiles/Application (readable through Kudu).
+loggingEnabled: true
+
+# Keep error details out of public responses; switch to true only while debugging.
+devErrorsEnabled: false
