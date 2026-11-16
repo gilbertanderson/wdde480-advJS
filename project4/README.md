@@ -13,7 +13,7 @@ I also made a few changes beyond the TODOs, since I believe they save trouble la
 
 ## Running it
 
-1. Copy `config/config.env.txt` to `config/config.env` and set `MONGO_URI` to the Atlas connection string from Project 3. The part after `.mongodb.net/` is the database name, so it needs to point at the database the resources were imported into (mine is `cmst488`), otherwise the API connects to an empty database. `config.env` is in `.gitignore`, so the string never reaches GitHub.
+1. Copy `config/config.env.txt` to `config/config.env` and set `MONGO_URI` to the Atlas connection string from Project 3. The part after `.mongodb.net/` is the database name, so it needs to point at the database the resources were imported into (mine is `wdde480`), otherwise the API connects to an empty database. `config.env` is in `.gitignore`, so the string never reaches GitHub.
 2. Run `npm install`, then `npm run dev`. The assignment text says `nodemon run dev`, but `npm run dev` is the command that actually works.
 3. Open `http://localhost:8000/` for the homepage and `http://localhost:8000/api/resources` for the JSON list.
 
