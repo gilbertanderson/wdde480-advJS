@@ -1,7 +1,14 @@
 # wdde480-advJS
 Advanced JavaScript @ UMGC
 
-This repo holds my WDDE 480 (also listed as CMST 488) coursework, and right now it contains Project 1, a small Node.js web server in the `project1` folder. What follows is a step-by-step guide so another developer can build the same thing from the starter files and get it onto GitHub and their own computer, and I kept the steps in the order I actually did them, so if you follow them top to bottom you should end up exactly where I did.
+This repo holds my WDDE 480 (also listed as CMST 488) coursework, with one folder per project.
+
+| Folder | Project |
+| --- | --- |
+| [`project1`](project1) | Project 1: a small Node.js web server with a health check, run with nodemon |
+| [`project4`](project4) | Project 4: a RESTful API with Express, Mongoose and MongoDB Atlas, live at [wdde480-umgc-ganderson58.azurewebsites.net](https://wdde480-umgc-ganderson58.azurewebsites.net/api/resources) |
+
+The rest of this page covers Project 1. What follows is a step-by-step guide so another developer can build the same thing from the starter files and get it onto GitHub and their own computer, and I kept the steps in the order I actually did them, so if you follow them top to bottom you should end up exactly where I did.
 
 ## Part 1: Get set up
 

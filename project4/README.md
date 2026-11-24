@@ -36,3 +36,13 @@ The handout also shows the single-record path as `/api/resource/<id>`, which is 
 The UMGC lab's App Service runs Windows with iisnode, and since my lab account has no access to the Azure portal I couldn't set any app settings, so the deployment has to carry everything it needs. That is why the folder has two Azure-only files. `web.config` sends every request to `index.js`, hides `node_modules` and `config` so `config.env` can never be downloaded, and passes the app's own error responses through, while `iisnode.yml` points iisnode at the Node 20 that is already installed on the server, because without `WEBSITE_NODE_DEFAULT_VERSION` it couldn't find `node.exe` at all.
 
 To deploy, I run `npm ci --omit=dev`, then zip `index.js`, `package.json`, `package-lock.json`, `web.config`, `iisnode.yml`, `config` (including my local `config.env`), `controllers`, `models`, `views` and `node_modules` with the files at the top level of the zip. The zip goes up through Kudu's Zip Push Deploy page or its `/api/zipdeploy` endpoint, using the publish profile login from the lab page. Atlas also has to allow the App Service's outbound IP, or `0.0.0.0/0`, under Network Access, and in my case the rule took a few minutes past "Active" before the live `/api/resources` started returning data.
+
+## Screenshots
+
+I took these in Thunder Client against `http://localhost:8000` on the UMGC virtual PC, with the server's request log showing in the terminal under each request.
+
+| | |
+| --- | --- |
+| ![GET all resources](screenshots/1-GET-all-resources.png) GET all returns 200 with every resource | ![POST create](screenshots/2-POST-create-resource.png) POST creates a record and returns its `_id` |
+| ![GET one](screenshots/3-GET-one-resource.png) GET one returns the new record | ![PUT update](screenshots/4-PUT-update-resource.png) PUT returns the updated record |
+| ![POST duplicate](screenshots/5-POST-duplicate-400.png) A duplicate name comes back as a 400 | ![DELETE](screenshots/6-DELETE-resource.png) DELETE returns 200 with `data: {}` |
